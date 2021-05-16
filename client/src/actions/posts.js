@@ -14,7 +14,6 @@ export const getPosts = () => async (dispatch) => {
 			type: FETCH_ALL,
 			payload: data,
 		};
-
 		dispatch(action);
 	} catch (error) {
 		console.error(error.message);

@@ -7,9 +7,12 @@ import useStyles from './styles';
 const Posts = ({ setCurrentId }) => {
 	const classes = useStyles();
 	const posts = useSelector((state) => state.posts);
-
+	const user = JSON.parse(localStorage.getItem('profile'));
+	
 	console.log(posts);
-	return !posts.length ? (
+	
+	
+	return !posts.length && user ? (
 		<CircularProgress style={{ color: 'white' }} />
 	) : (
 		<Grid

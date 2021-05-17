@@ -13,13 +13,22 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import useStyles from './styles';
-import Input from './Input';
 import Icon from './icon';
+import Input from './Input';
+import { signup, signin } from '../../actions/auth';
 
+const initialState = {
+	firstName: '',
+	lastName: '',
+	email: '',
+	password: '',
+	confirmPassword: '',
+};
 const Auth = () => {
 	const history = useHistory();
 
 	const [showPassword, setShowPassword] = useState(false);
+	const [formData, setFormData] = useState(initialState);
 
 	const [isSignUp, setIsSignUp] = useState(false);
 
@@ -28,15 +37,22 @@ const Auth = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		if (isSignUp) {
+			dispatch(signup(formData, history));
+		} else {
+			dispatch(signin(formData, history));
+		}
 	};
 
-	const handleChange = () => {};
+	const handleChange = (event) => {
+		setFormData({ ...formData, [event.target.name]: event.target.value });
+	};
 
 	const handleShowPassword = () => setShowPassword(!showPassword);
 
 	const switchMode = () => {
-		setIsSignUp(!isSignUp);
-		handleShowPassword(false);
+		setIsSignUp((prevState) => !prevState);
+		setShowPassword(false);
 	};
 
 	const googleSuccess = async (res) => {
@@ -112,10 +128,10 @@ const Auth = () => {
 						color='primary'
 						className={classes.submit}
 					>
-						{isSignUp ? 'Sign In' : 'Sign Up'}
+						{isSignUp ? 'Sign Up' : 'Sign In'}
 					</Button>
 					<GoogleLogin
-						clientId={process.env.GOOGLE_CLIENT_ID}
+						clientId='346506051734-jieof5a2jvscnjo70fmkpiuv45osu7hn.apps.googleusercontent.com'
 						render={(renderProps) => (
 							<Button
 								className={classes.googleButton}

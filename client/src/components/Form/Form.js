@@ -87,7 +87,7 @@ const Form = ({ currentId, setCurrentId }) => {
 					}
 				/>
 				<TextField
-					name='message'
+					name='tags'
 					variant='outlined'
 					label='Tags'
 					fullWidth

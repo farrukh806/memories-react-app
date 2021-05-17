@@ -69,6 +69,7 @@ const Form = ({ currentId, setCurrentId }) => {
 				<TextField
 					name='title'
 					variant='outlined'
+					required
 					label='Title'
 					fullWidth
 					value={postData.title}
@@ -79,6 +80,7 @@ const Form = ({ currentId, setCurrentId }) => {
 					variant='outlined'
 					label='Message'
 					fullWidth
+					required
 					value={postData.message}
 					multiline
 					rows={4}
@@ -90,6 +92,7 @@ const Form = ({ currentId, setCurrentId }) => {
 					name='tags'
 					variant='outlined'
 					label='Tags'
+					required
 					fullWidth
 					value={postData.tags}
 					onChange={(e) =>
@@ -99,6 +102,7 @@ const Form = ({ currentId, setCurrentId }) => {
 				<div className={classes.fileInput}>
 					<FileBase
 						type='file'
+						required
 						multiple={false}
 						onDone={({ base64 }) =>
 							setPostData({ ...postData, selectedFile: base64 })

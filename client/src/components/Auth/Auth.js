@@ -7,6 +7,7 @@ import {
 	Paper,
 	Typography,
 } from '@material-ui/core';
+import dotenv from 'dotenv';
 
 import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -16,6 +17,8 @@ import useStyles from './styles';
 import Icon from './icon';
 import Input from './Input';
 import { signup, signin } from '../../actions/auth';
+
+dotenv.config();
 
 const initialState = {
 	firstName: '',
@@ -131,7 +134,7 @@ const Auth = () => {
 						{isSignUp ? 'Sign Up' : 'Sign In'}
 					</Button>
 					<GoogleLogin
-						clientId='346506051734-jieof5a2jvscnjo70fmkpiuv45osu7hn.apps.googleusercontent.com'
+						clientId={process.env.GOOGLE_CLIENT_ID}
 						render={(renderProps) => (
 							<Button
 								className={classes.googleButton}

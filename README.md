@@ -1,2 +1,3 @@
 # memories-react-app
-<h6> <a href="https://app-memories3.netlify.app/">Live preview hosted on -:</a></h6>
+<h3> Live preview hosted on netlify -:</h3>
+<a href="https://app-memories3.netlify.app/">Click Here:-</a>

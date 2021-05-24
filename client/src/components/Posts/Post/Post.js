@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
 	Card,
 	CardActions,
@@ -6,6 +7,7 @@ import {
 	CardMedia,
 	Button,
 	Typography,
+	ButtonBase,
 } from '@material-ui/core';
 import moment from 'moment';
 
@@ -33,6 +35,7 @@ const Post = ({
 }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const user = JSON.parse(localStorage.getItem('profile'));
 
 	const Likes = () => {
@@ -63,41 +66,49 @@ const Post = ({
 		);
 	};
 
-	return (
-		<Card className={classes.card}>
-			<CardMedia className={classes.media} image={selectedFile} title={title} />
+	const openPost = () => history.push(`/posts/${_id}`);
 
-			<div className={classes.overlay}>
-				<Typography varint='h6'>{name}</Typography>
-				<Typography varint='body2'>{moment(createdAt).fromNow()}</Typography>
-			</div>
-			{(user?.result?.googleId === creator ||
-				user?.result?._id === creator) && (
-				<div className={classes.overlay2}>
-					<Button
-						style={{ color: 'white' }}
-						size='small'
-						onClick={() => {
-							setCurrentId(_id);
-						}}
-					>
-						<MoreHorizIcon fontSize='default' />
-					</Button>
+	return (
+		<Card className={classes.card} elevation={5}>
+			<ButtonBase className={classes.cardAction} onClick={openPost}>
+				<CardMedia
+					className={classes.media}
+					image={selectedFile}
+					title={title}
+				/>
+
+				<div className={classes.overlay}>
+					<Typography varint='h6'>{name}</Typography>
+					<Typography varint='body2'>{moment(createdAt).fromNow()}</Typography>
 				</div>
-			)}
-			<div className={classes.details}>
-				<Typography varint='body2' color='textSecondary'>
-					{tags.map((tag) => `#${tag} `)}
+				{(user?.result?.googleId === creator ||
+					user?.result?._id === creator) && (
+					<div className={classes.overlay2}>
+						<Button
+							style={{ color: 'white' }}
+							size='small'
+							onClick={() => {
+								setCurrentId(_id);
+							}}
+						>
+							<MoreHorizIcon fontSize='default' />
+						</Button>
+					</div>
+				)}
+				<div className={classes.details}>
+					<Typography varint='body2' color='textSecondary'>
+						{tags.map((tag) => `#${tag} `)}
+					</Typography>
+				</div>
+				<Typography className={classes.title} gutterBottom>
+					{title}
 				</Typography>
-			</div>
-			<Typography className={classes.title} gutterBottom>
-				{title}
-			</Typography>
-			<CardContent>
-				<Typography varint='body2' color='textSecondary' component='p'>
-					{message}
-				</Typography>
-			</CardContent>
+				<CardContent>
+					<Typography varint='body2' color='textSecondary' component='p'>
+						{message}
+					</Typography>
+				</CardContent>
+			</ButtonBase>
 			<CardActions className={classes.cardActions}>
 				<Button
 					size='small'

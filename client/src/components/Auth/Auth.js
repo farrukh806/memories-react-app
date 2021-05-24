@@ -17,9 +17,7 @@ import Icon from './icon';
 import Input from './Input';
 import { signup, signin } from '../../actions/auth';
 import dotenv from 'dotenv';
-
 dotenv.config();
-
 const initialState = {
 	firstName: '',
 	lastName: '',
@@ -29,7 +27,6 @@ const initialState = {
 };
 const Auth = () => {
 	const history = useHistory();
-
 	const [showPassword, setShowPassword] = useState(false);
 	const [formData, setFormData] = useState(initialState);
 

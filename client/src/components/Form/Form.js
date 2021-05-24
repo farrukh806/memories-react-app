@@ -7,7 +7,7 @@ import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
-	const post = useSelector((state) =>
+	const post  = useSelector((state) =>
 		currentId ? state.posts.find((p) => p._id === currentId) : null
 	);
 
@@ -56,7 +56,7 @@ const Form = ({ currentId, setCurrentId }) => {
 		);
 	}
 	return (
-		<Paper className={classes.paper}>
+		<Paper className={classes.paper} elevation={6}>
 			<form
 				autoComplete='off'
 				noValidate
@@ -78,9 +78,9 @@ const Form = ({ currentId, setCurrentId }) => {
 				<TextField
 					name='message'
 					variant='outlined'
+					required
 					label='Message'
 					fullWidth
-					required
 					value={postData.message}
 					multiline
 					rows={4}
@@ -91,10 +91,11 @@ const Form = ({ currentId, setCurrentId }) => {
 				<TextField
 					name='tags'
 					variant='outlined'
-					label='Tags'
 					required
+					label='Tags (separated by coma)'
 					fullWidth
 					value={postData.tags}
+					placeholder='Tags(separated by coma)'
 					onChange={(e) =>
 						setPostData({ ...postData, tags: e.target.value.split(',') })
 					}
@@ -102,6 +103,7 @@ const Form = ({ currentId, setCurrentId }) => {
 				<div className={classes.fileInput}>
 					<FileBase
 						type='file'
+						name='selectedFile'
 						required
 						multiple={false}
 						onDone={({ base64 }) =>
